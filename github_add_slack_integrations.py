@@ -3,12 +3,12 @@
 """This tool takes in a JSON list of integrations in a file named
 integrations.json (in current working directory), formatted like:
 
-       { "channel1": { "slackToken": "NNNN/XXXX/YYYYYYYYYYZ",
+       { "room1": { "slackToken": "NNNN/XXXX/YYYYYYYYYYZ",
                        "repos": ["repo1", "repo2"]
-                      },
-         "channel2": { "slackToken": "NNNN/ZZZZ/DDDDDDDDDDD",
+                  },
+         "room2": { "slackToken": "NNNN/ZZZZ/DDDDDDDDDDD",
                        "repos": ["repo1", "repo2"]
-                      }
+                  }
        } 
 
 You should also populate 'OWNER_NAME' at the top, and configure the file
