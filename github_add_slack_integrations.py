@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """This tool takes in a JSON list of integrations in a file named
-integrations.json, formatted like:
+integrations.json (in current working directory), formatted like:
 
        { "channel1": { "slackToken": "NNNN/XXXX/YYYYYYYYYYZ",
                        "repos": ["repo1", "repo2"]
@@ -16,7 +16,6 @@ You should also populate 'OWNER_NAME' at the top, and configure the file
 """
 __author__ = "William Yardley"
 
-import json
 import requests
 import sys
 from os.path import expanduser

@@ -10,7 +10,6 @@ near the top.
 __author__ = "William Yardley"
 
 import argparse
-import json
 import requests
 import os
 import sys
