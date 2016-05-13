@@ -17,7 +17,6 @@ from os.path import expanduser
 
 API_URL='https://api.github.com'
 OWNER_NAME=''
-github_token=str()
 
 def _arg_parser():
 
@@ -54,7 +53,7 @@ def get_repos():
     while True:
         params = {'page':i, 'per_page':100}
         response = requests.get(call, params=params,
-              headers={'Authorization': github_token})
+              headers=headers)
         if response.status_code == 200:
             if len(response.json()) > 0:
                 for item in response.json():
@@ -63,6 +62,7 @@ def get_repos():
                 break
         else:
             print >> sys.stderr, "Got error %s" % response.status_code
+            sys.exit(1)
         i += 1
 
     return repos
@@ -74,7 +74,7 @@ def get_hooks(repo):
     call = '%s/repos/%s/%s/hooks' % (API_URL, OWNER_NAME, repo)
 
     response = requests.get(call,
-          headers={'Authorization': github_token})
+          headers=headers)
     for item in response.json():
         if item['name'] == 'web':
             item_id = item['id']
@@ -88,7 +88,7 @@ def get_hooks(repo):
 def delete_hook(repo, hook_id):
 
     call = '%s/repos/%s/%s/hooks/%s' % (API_URL, OWNER_NAME, repo, hook_id)
-    response = requests.delete(call, headers={'Authorization': github_token})
+    response = requests.delete(call, headers=headers)
     if response.status_code == 204:
         print >> sys.stderr, "Deleted hook %s on repo %s" % (hook_id, repo)
     else:
@@ -98,8 +98,13 @@ def delete_hook(repo, hook_id):
 def main():
 
     args = _p.parse_args()
-    global github_token
     github_token=get_github_token()
+
+    # Specify Auth and Accept headers in one place, and specify API
+    # version.
+    global headers
+    headers={'Authorization': github_token,
+             'Accept': 'application/vnd.github.v3+json'}
 
     repos = get_repos()
     for repo in repos:

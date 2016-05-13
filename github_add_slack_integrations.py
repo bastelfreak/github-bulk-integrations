@@ -34,7 +34,8 @@ def create_webhook(github_token, repo, slack_webhook):
                  }
                }
     response = requests.post(call, json=payload,
-          headers={'Authorization': github_token})
+          headers={'Authorization': github_token,
+                   'Accept': 'application/vnd.github.v3+json'})
     if response.status_code == 201:
         print >> sys.stderr, "Added integration for %s" % repo
     else:
