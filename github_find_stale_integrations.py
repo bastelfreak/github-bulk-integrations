@@ -103,9 +103,6 @@ def main():
 
     repos = get_repos()
     for repo in repos:
-        # hack to skip 'site-*' repos
-        if repo.startswith('site-'):
-            continue
         hooks = get_hooks(repo)
         for hook_id, url in hooks.iteritems():
             if args.pattern in url:
