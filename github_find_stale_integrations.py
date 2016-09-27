@@ -2,7 +2,7 @@
 
 """
 You should configure the file '.github_token' in your home directory
-with a github API token. Additionally, Make sure to update 'OWNER_NAME'
+with a github API token. Additionally, make sure to update 'OWNER_NAME'
 near the top.
 
 """
